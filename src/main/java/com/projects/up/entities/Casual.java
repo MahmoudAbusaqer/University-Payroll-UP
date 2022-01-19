@@ -14,36 +14,37 @@ import javax.persistence.ManyToMany;
 public class Casual {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int Id;
+	private int id;
 	private String name;
 	private String email;
 	private String password;
-	private double salary;
-	private String methodOfPayment;
+	private int numberOfHours;
 	private double rate;
+	private String methodOfPayment;
+	
 
 	public Casual() {
 
 	}
 
-	public Casual(int id, String name, String email, String password, double salary, String methodOfPayment,
+	public Casual(int id, String name, String email, String password, int numberOfHours, String methodOfPayment,
 			double rate) {
 		super();
-		Id = id;
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.salary = salary;
+		this.numberOfHours = numberOfHours;
 		this.methodOfPayment = methodOfPayment;
 		this.rate = rate;
 	}
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {
@@ -70,12 +71,14 @@ public class Casual {
 		this.password = password;
 	}
 
-	public double getSalary() {
-		return salary;
+	
+
+	public int getNumberOfHours() {
+		return numberOfHours;
 	}
 
-	public void setSalary(double salary) {
-		this.salary = salary;
+	public void setNumberOfHours(int numberOfHours) {
+		this.numberOfHours = numberOfHours;
 	}
 
 	public String getMethodOfPayment() {

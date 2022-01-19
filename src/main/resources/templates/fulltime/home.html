@@ -34,6 +34,65 @@
 			</div>
 		</div>
 	</nav>
+<div class="d-flex align-items-start m-4"></div>
+	<!-- info card -->
+<div class="col d-flex justify-content-center">
+	<div class="card mb-3 text-center display:flex"" style="max-width: 840px;">
+		<div class="row g-0">
+			<div class="col-md-4 text-center">
+				<img
+					src="C:/Users/hp/OneDrive/Documents/Spring-Tool-Suite/University_Payroll-UP/src/main/resources/static/img/academics.png"
+					class="img-fluid rounded-start " alt="..."> 
+			</div>
+			<div class="col-md-8 ">
+				<div class="card-body">
+					<h1 class="card-title fw-bold">Academic Information</h1>
 
+					<!--Form-->
+					<form action="/pd/addEmployee/saveFull" method="post"
+						th:object="${fullTimeEmployee}" class="validation" novalidate>
+
+						<div class="form-group my-2">
+							<label for="title" class="mt-4 mb-2 fw-bold">ID:</label> <label
+								for="title" class="mt-4 mb-2">123</label>
+						</div>
+
+						<div class="form-group my-2">
+							<label for="title" class="mt-4 mb-2 fw-bold">Name:</label> <label
+								for="title" class="mt-4 mb-2">Mas</label>
+						</div>
+
+						<div class="form-group my-2">
+							<label for="title" class="mt-4 mb-2 fw-bold">Email:</label> <label
+								for="title" class="mt-4 mb-2">email</label>
+						</div>
+
+						<div class="form-group my-2">
+							<label for="title" class="mt-4 mb-2 fw-bold">salary:</label>
+							 <label for="title" class="mt-4 mb-2">5000</label>
+						</div>
+
+
+						<div class="form-group my-2">
+							<label for="title" class="mt-4 mb-2 fw-bold">Method Of
+								Payment:</label> <label for="title" class="mt-4 mb-2">methodOfPayment</label>
+						</div>
+
+						<div class="form-group my-2">
+							<label for="title" class="mt-4 mb-2 fw-bold">Number Of All Leaves:</label> <label
+								for="title" class="mt-4 mb-2">50</label>
+						</div>
+						
+						<div class="form-group my-2">
+							<label for="title" class="mt-4 mb-2 fw-bold">Number Of Leaves Taken:</label> <label
+								for="title" class="mt-4 mb-2">2</label>
+						</div>
+					</form>
+					<!--End of form-->
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
 </body>
 </html>
