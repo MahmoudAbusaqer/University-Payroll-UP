@@ -25,29 +25,30 @@
 
 		<div class="card text-center display:flex"
 			style="width: 25rem; top: 5em;">
-			<img src="C:/Users/hp/OneDrive/Documents/Spring-Tool-Suite/University_Payroll-UP/src/main/resources/static/img/bg-1.jpg" class="card-img-top" alt="...">
+			<img alt="..." class="card-img-top" th:src="@{/img/bg-1.jpg}">
+			<!-- <img src="C:/Users/hp/OneDrive/Documents/Spring-Tool-Suite/University_Payroll-UP/src/main/resources/static/img/bg-1.jpg" class="card-img-top" alt="..."> -->
+
 			<div class="card-body">
 				<h5 class="card-title">Sign In</h5>
-				
-				<form th:action="@{login/{id}(id=${employee.id})}" method="get" th:object="${employee}"
-					class="validation" novalidate>
+
+				<form class="validation" method="post" novalidate th:action="@{/login/}">
 					<div class="mb-3">
-						<label for="exampleInputEmail1" class="form-label">ID</label> <input
-							type="text" th:field="${employee.id}" class="form-control" id="id"
-							aria-describedby="emailHelp" required>
+						<label class="form-label">ID</label>
+						 <input	 class="form-control" id="id"
+							placeholder="id" name="id" type="text" required>
 						<div class="valid-feedback">Good</div>
 						<div class="invalid-feedback">Please fill the field</div>
 					</div>
-<!-- 					<div class="mb-3"> -->
-<!-- 						<label for="exampleInputPassword1" class="form-label">Password</label> -->
-<!-- 						<input type="password" th:field="${employee.password}" class="form-control" -->
-<!-- 							id="exampleInputPassword1" required> -->
-<!-- 						<div class="valid-feedback">Good</div> -->
-<!-- 						<div class="invalid-feedback">Please fill the field</div> -->
-<!-- 					</div> -->
-					<button type="submit" class="btn btn-success">Sign In</button>
+					<div class="mb-3">
+						<label class="form-label">Password</label>
+						<input class="form-control" id="password"
+							 placeholder="password" type="password" name="password" required>
+						<div class="valid-feedback">Good</div>
+						<div class="invalid-feedback">Please fill the field</div>
+					</div>
+					<button class="btn btn-success" type="submit">Sign In</button>
 				</form>
-				
+
 			</div>
 		</div>
 	</div>

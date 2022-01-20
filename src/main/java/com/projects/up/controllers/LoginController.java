@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projects.up.dao.CasualRepository;
 import com.projects.up.dao.FullTimeRepository;
 import com.projects.up.dao.PersonnelDepartmentRepository;
+import com.projects.up.entities.Casual;
 import com.projects.up.entities.FullTime;
 import com.projects.up.entities.PersonnelDepartment;
 
@@ -28,46 +30,41 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String displayHome(Model model) {
-//		model.addAttribute("employee", new PersonnelDepartment());
-		model.addAttribute("employee", new FullTime());
+
 		return "login";
 	}
 
-	@GetMapping("/login/{id}")
-	public String createAddEmployeeFullTime(@PathVariable int id) {
-		System.out.println("0");
-		fullTimeRepo.findById(id);
-//		casualRepo.findById(id);
-//		pdReop.findById(id);
-//		if (fullTimeRepo != null) {
-//		    System.out.println("1");
-			return "redirect:/fulltime";
-//		}
-//		else
-//
-//		if (casualRepo != null) {
-//			System.out.println("2");
-//			return "redirect:/casual";
-//		}
-//		else
-//		if (pdReop != null) {
-//			System.out.println("3");
-//			return "redirect:/pd";
-//		}else {
-//			System.out.println("4");
-//			return "redirect:/login";
-//		}
-		
+	@PostMapping("/login")
+	public String createAddEmployeeFullTime(@RequestParam int id, @RequestParam String password, Model model) {
+		System.out.println("id: " + id);
+		System.out.println("password: " + password);
+		FullTime fullTime = fullTimeRepo.findById(id).orElse(null);
+//		System.out.println("fullTime.getPassword(): " + fullTime.getPassword());
+		Casual casual = casualRepo.findById(id).orElse(null);
+		PersonnelDepartment pd = pdReop.findById(id).orElse(null);
+		if (fullTime != null && fullTime.getPassword().equals(password)) {
+//			if (fullTime != null && fullTime.getPassword() == password) {
+//			if (fullTime.getPassword() == password) {
+				System.out.println("state 1");
+				model.addAttribute("fullTime", fullTime);
+				System.out.println(fullTime.getName());
+				return "redirect:/fulltime";
+//			}
+
+		} else if (casual != null && casual.getPassword().equals(password)) {
+			System.out.println("state 2");
+			model.addAttribute("casual", casual);
+			System.out.println(casual.getName());
+			return "redirect:/casual";
+		} else if (pd != null && pd.getPassword().equals(password)) {
+			System.out.println("state 3");
+			model.addAttribute("pd", pd);
+			System.out.println(pd.getName());
+			return "redirect:/pd";
+		} else {
+			System.out.println("state 4");
+			return "redirect:/login";
+		}
+
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
