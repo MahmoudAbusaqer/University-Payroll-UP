@@ -29,7 +29,7 @@
 			<div class="card-body">
 				<h5 class="card-title">Sign In</h5>
 				
-				<form action="/login/" method="get" th:object="${employee}"
+				<form th:action="@{login/{id}(id=${employee.id})}" method="get" th:object="${employee}"
 					class="validation" novalidate>
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">ID</label> <input
@@ -45,7 +45,7 @@
 <!-- 						<div class="valid-feedback">Good</div> -->
 <!-- 						<div class="invalid-feedback">Please fill the field</div> -->
 <!-- 					</div> -->
-					<button type="submit" th:href="@{login/{id}(id=${employee.id})}" class="btn btn-success">Sign In</button>
+					<button type="submit" class="btn btn-success">Sign In</button>
 				</form>
 				
 			</div>
