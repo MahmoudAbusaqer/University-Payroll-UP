@@ -1,14 +1,9 @@
 package com.projects.up.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class FullTime {
@@ -27,9 +22,10 @@ public class FullTime {
 
 	}
 
-	public FullTime(int id, String name, String email, String password, double salary, String methodOfPayment, int numberOfALLLeaves, int numberOfLeavesTaken) {
+	public FullTime(int id, String name, String email, String password, double salary, String methodOfPayment,
+			int numberOfALLLeaves, int numberOfLeavesTaken) {
 		super();
-		id = id;
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -44,7 +40,7 @@ public class FullTime {
 	}
 
 	public void setId(int id) {
-		id = id;
+		this.id = id;
 	}
 
 	public String getName() {

@@ -1,14 +1,9 @@
 package com.projects.up.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Casual {
@@ -21,7 +16,6 @@ public class Casual {
 	private int numberOfHours;
 	private double rate;
 	private String methodOfPayment;
-	
 
 	public Casual() {
 
@@ -70,8 +64,6 @@ public class Casual {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	
 
 	public int getNumberOfHours() {
 		return numberOfHours;
