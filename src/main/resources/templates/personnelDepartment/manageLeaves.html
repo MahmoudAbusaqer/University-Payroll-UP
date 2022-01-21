@@ -17,7 +17,8 @@
 <body style="background-color: #f8f9fd">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="home.html">University Payroll - UP | Personnel Department</a>
+			<a class="navbar-brand" th:href="@{/pd/}">University Payroll - UP
+				| Personnel Department</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 				aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -26,15 +27,37 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link " href="home.html">Home</a>
-					 <a class="nav-link" href="addEmployee.html">Add Employee</a>
-					 <a class="nav-link" href="deleteEmployee.html">Delete Employee</a>
-					 <a class="nav-link active" aria-current="page" href="">Manage Leaves</a>
-					 <a class="nav-link" href="recordLeaves.html">Record Leaves</a>
+					<a class="nav-link " th:href="@{/pd/}">Home</a> <a class="nav-link"
+						th:href="@{/pd/addEmployee}">Add Employee</a> <a class="nav-link"
+						th:href="@{/pd/deleteEmployee}">Delete Employee</a> <a
+						class="nav-link active" aria-current="page" th:href="@{/pd/manageLeaves}">Manage
+						Leaves</a> <a class="nav-link" th:href="@{/pd/recordLeaves}">Record
+						Leaves</a>
 				</div>
 			</div>
 		</div>
 	</nav>
+	
 
+<script>
+        // Disable form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Get the forms we want to add validation styles to
+                var forms = document.getElementsByClassName('validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>	
 </body>
 </html>

@@ -26,23 +26,21 @@
 		<div class="card text-center display:flex"
 			style="width: 25rem; top: 5em;">
 			<img alt="..." class="card-img-top" th:src="@{/img/bg-1.jpg}">
-			<!-- <img src="C:/Users/hp/OneDrive/Documents/Spring-Tool-Suite/University_Payroll-UP/src/main/resources/static/img/bg-1.jpg" class="card-img-top" alt="..."> -->
-
 			<div class="card-body">
 				<h5 class="card-title">Sign In</h5>
 
-				<form class="validation" method="post" novalidate th:action="@{/login/}">
+				<form class="validation" method="post" th:action="@{/login/}" novalidate>
 					<div class="mb-3">
 						<label class="form-label">ID</label>
 						 <input	 class="form-control" id="id"
-							placeholder="id" name="id" type="text" required>
+							placeholder="Id" name="id" type="text" required>
 						<div class="valid-feedback">Good</div>
 						<div class="invalid-feedback">Please fill the field</div>
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Password</label>
 						<input class="form-control" id="password"
-							 placeholder="password" type="password" name="password" required>
+							 placeholder="Password" type="password" name="password" required>
 						<div class="valid-feedback">Good</div>
 						<div class="invalid-feedback">Please fill the field</div>
 					</div>
@@ -71,7 +69,6 @@
                 });
             }, false);
         })();
-
     </script>
 </body>
 </html>

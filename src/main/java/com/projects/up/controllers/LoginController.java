@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,29 +27,26 @@ public class LoginController {
 	@Autowired
 	PersonnelDepartmentRepository pdReop;
 
-	@GetMapping("/login")
+	@GetMapping("/")
 	public String displayHome(Model model) {
+		return "redirect:/login";
+	}
 
+	@GetMapping("/login")
+	public String displayLogin(Model model) {
 		return "login";
 	}
 
 	@PostMapping("/login")
 	public String createAddEmployeeFullTime(@RequestParam int id, @RequestParam String password, Model model) {
-		System.out.println("id: " + id);
-		System.out.println("password: " + password);
 		FullTime fullTime = fullTimeRepo.findById(id).orElse(null);
-//		System.out.println("fullTime.getPassword(): " + fullTime.getPassword());
 		Casual casual = casualRepo.findById(id).orElse(null);
 		PersonnelDepartment pd = pdReop.findById(id).orElse(null);
 		if (fullTime != null && fullTime.getPassword().equals(password)) {
-//			if (fullTime != null && fullTime.getPassword() == password) {
-//			if (fullTime.getPassword() == password) {
-				System.out.println("state 1");
-				model.addAttribute("fullTime", fullTime);
-				System.out.println(fullTime.getName());
-				return "redirect:/fulltime";
-//			}
-
+			System.out.println("state 1");
+			model.addAttribute("fullTime", fullTime);
+			System.out.println(fullTime.getName());
+			return "redirect:/fulltime";
 		} else if (casual != null && casual.getPassword().equals(password)) {
 			System.out.println("state 2");
 			model.addAttribute("casual", casual);
