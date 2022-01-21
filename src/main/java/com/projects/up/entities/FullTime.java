@@ -99,4 +99,11 @@ public class FullTime {
 		this.numberOfLeavesTaken = numberOfLeavesTaken;
 	}
 
+	@Override
+	public String toString() {
+		return "FullTime [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", salary="
+				+ salary + ", methodOfPayment=" + methodOfPayment + ", numberOfALLLeaves=" + numberOfALLLeaves
+				+ ", numberOfLeavesTaken=" + numberOfLeavesTaken + "]";
+	}
+
 }

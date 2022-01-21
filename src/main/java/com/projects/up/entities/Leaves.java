@@ -73,4 +73,10 @@ public class Leaves {
 		this.employee = employee;
 	}
 
+	@Override
+	public String toString() {
+		return "Leaves [leaveId=" + leaveId + ", numberOfDays=" + numberOfDays + ", type=" + type + ", reason=" + reason
+				+ ", employee=" + employee + "]";
+	}
+
 }

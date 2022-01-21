@@ -1,5 +1,8 @@
 package com.projects.up.controllers;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +17,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projects.up.dao.CasualRepository;
 import com.projects.up.dao.FullTimeRepository;
+import com.projects.up.dao.PersonnelDepartmentRepository;
 import com.projects.up.entities.Casual;
 import com.projects.up.entities.FullTime;
+import com.projects.up.entities.PersonnelDepartment;
 
 @Controller
 @RequestMapping("/pd")
 public class PersonnelDepartmentController {
+
+	private BufferedReader br;
+	private int id;
 
 	@Autowired
 	FullTimeRepository fullTimeRepo;
@@ -27,8 +35,19 @@ public class PersonnelDepartmentController {
 	@Autowired
 	CasualRepository casualRepo;
 
+	@Autowired
+	PersonnelDepartmentRepository pdRepo;
+
 	@GetMapping("")
-	public String displayHome() {
+	public String displayHome(Model model) throws IOException {
+		br = new BufferedReader(new FileReader("saveid.txt"));
+		String st = null;
+		while ((st = br.readLine()) != null) {
+			id = Integer.parseInt(st);
+			System.out.println("id: " + id);
+		}
+		PersonnelDepartment pd = pdRepo.findById(id).get();;
+		model.addAttribute("employee", pd);
 		return "personnelDepartment/home";
 	}
 
@@ -78,7 +97,7 @@ public class PersonnelDepartmentController {
 	public String displayManageLeaves() {
 		return "personnelDepartment/manageLeaves";
 	}
-	
+
 	@GetMapping("/recordLeaves")
 	public String displayRecordLeaves() {
 		System.out.println("inside recordLeaves");
@@ -86,7 +105,8 @@ public class PersonnelDepartmentController {
 	}
 
 	@PostMapping("/recordLeaves")
-	public String setRecordLeaves(@RequestParam int id, @RequestParam int number, Model model, RedirectAttributes redirectAttributes) {
+	public String setRecordLeaves(@RequestParam int id, @RequestParam int number, Model model,
+			RedirectAttributes redirectAttributes) {
 		System.out.println("id" + id);
 		System.out.println("number" + number);
 		FullTime fullTime = fullTimeRepo.findById(id).orElse(null);
