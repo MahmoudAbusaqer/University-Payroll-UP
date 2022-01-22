@@ -1,7 +1,5 @@
 package com.projects.up.controllers;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,17 +27,13 @@ import com.projects.up.entities.FullTime;
 import com.projects.up.entities.FulltimePayments;
 import com.projects.up.entities.Leaves;
 import com.projects.up.entities.Mail;
-import com.projects.up.entities.PersonnelDepartment;
 import com.projects.up.entities.TimeCard;
-import com.projects.up.services.SendMailService;
 import com.projects.up.services.SendMailServiceImpl;
 
 @Controller
 @RequestMapping("/pd")
 public class PersonnelDepartmentController {
 
-//	private BufferedReader br;
-//	private int id;
 
 	@Autowired
 	FullTimeRepository fullTimeRepo;
@@ -69,14 +63,6 @@ public class PersonnelDepartmentController {
 
 	@GetMapping("")
 	public String displayHome(Model model) throws IOException {
-//		br = new BufferedReader(new FileReader("saveid.txt"));
-//		String st = null;
-//		while ((st = br.readLine()) != null) {
-//			id = Integer.parseInt(st);
-//			System.out.println("id: " + id);
-//		}
-//		PersonnelDepartment pd = pdRepo.findById(id).get();;
-//		model.addAttribute("employee", pd);
 		List<TimeCard> timecards = timecardRepo.findAll();
 		model.addAttribute("timecards", timecards);
 		return "personnelDepartment/home";
@@ -118,13 +104,12 @@ public class PersonnelDepartmentController {
 			fulltimePayments.setEmployee(fullTimes.get(i));
 			fulltimePaymentsRepo.save(fulltimePayments);
 			if (fullTimes.get(i).getMethodOfPayment().equals("mailed")) {
-				sendMailServiceImpl.sendMail(new Mail(fullTimes.get(i).getEmail(), "Your timecard has been accepted", "Hi, "
+				sendMailServiceImpl.sendMail(new Mail(fullTimes.get(i).getEmail(), "Here is your montly payment checks", "Hi, "
 						+ fullTimes.get(i).getName() + ".\n Here is your Checks.\n" + "Date: "
 						+ Calendar.getInstance().getTime() + "\n" + "PAY TO THE ORDER OF " + fullTimes.get(i).getName()
 						+ " $" + (fullTimes.get(i).getSalary() - tax)));
 			}
 		}
-//		redirectAttributes.addFlashAttribute("error", "It is not time yet for payments.");
 		redirectAttributes.addFlashAttribute("message", "All Full-Time Employees have been paid.");
 		return "redirect:/pd";
 	}
@@ -137,14 +122,17 @@ public class PersonnelDepartmentController {
 	}
 
 	@PostMapping("/addEmployee/saveFull")
-	public String createAddEmployeeFullTime(FullTime fullTime, Model model) {
+	public String createAddEmployeeFullTime(FullTime fullTime, Model model, RedirectAttributes redirectAttributes) {
 		fullTimeRepo.save(fullTime);
+		redirectAttributes.addFlashAttribute("message", "The full time employee has been added.");
 		return "redirect:/pd/addEmployee";
 	}
 
 	@PostMapping("/addEmployee/saveCasual")
-	public String createAddEmployeeCasual(Casual casual, Model model) {
+	public String createAddEmployeeCasual(Casual casual, Model model, RedirectAttributes redirectAttributes) {
 		casualRepo.save(casual);
+		redirectAttributes.addFlashAttribute("message", "The casual employee has been added.");
+
 		return "redirect:/pd/addEmployee";
 	}
 
@@ -160,14 +148,16 @@ public class PersonnelDepartmentController {
 	}
 
 	@GetMapping(path = "/deleteEmployee/deletefull/{id}")
-	public String deleteEmployeeFull(@PathVariable int id) {
+	public String deleteEmployeeFull(@PathVariable int id, RedirectAttributes redirectAttributes) {
 		fullTimeRepo.deleteById(id);
+		redirectAttributes.addFlashAttribute("message", "The full time employee has been deleted.");
 		return "redirect:/pd/deleteEmployee";
 	}
 
 	@GetMapping(path = "/deleteEmployee/deletecasual/{id}")
-	public String deleteEmployeeCasual(@PathVariable int id) {
+	public String deleteEmployeeCasual(@PathVariable int id, RedirectAttributes redirectAttributes) {
 		casualRepo.deleteById(id);
+		redirectAttributes.addFlashAttribute("message", "The casual employee has been deleted.");
 		return "redirect:/pd/deleteEmployee";
 	}
 
@@ -212,6 +202,7 @@ public class PersonnelDepartmentController {
 			}
 
 		}
+		redirectAttributes.addFlashAttribute("message", "The leaves has been recorded.");
 		return "redirect:/pd/recordLeaves";
 	}
 
