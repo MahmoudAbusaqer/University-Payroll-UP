@@ -29,10 +29,10 @@
 				<div class="navbar-nav">
 					<a class="nav-link " th:href="@{/pd/}">Home</a> <a class="nav-link"
 						th:href="@{/pd/addEmployee}">Add Employee</a> <a class="nav-link"
-						th:href="@{/pd/deleteEmployee}">Delete Employee</a> <a class="nav-link"
-						th:href="@{/pd/manageLeaves}">Manage Leaves</a> <a
-						class="nav-link active" aria-current="page" th:href="@{/pd/recordLeaves}">Record
-						Leaves</a>
+						th:href="@{/pd/deleteEmployee}">Delete Employee</a> <a
+						class="nav-link" th:href="@{/pd/manageLeaves}">Manage Leaves</a> <a
+						class="nav-link active" aria-current="page"
+						th:href="@{/pd/recordLeaves}">Record Leaves</a>
 				</div>
 			</div>
 		</div>
@@ -56,25 +56,53 @@
 							<h3 class="my-4 text-center" style="color: #007BFF;">Record
 								a Leave for a Full Time Employee</h3>
 						</div>
-						<form class="validation" method="post" th:action="@{/pd/recordLeaves/}"
-							novalidate>
+						<form class="validation" method="post" th:object="${leave}"
+							th:action="@{/pd/recordLeaves/}" novalidate>
 							<div class="form-group my-4">
 								<label for="title" class="mt-4 mb-2 fw-bold">ID<span
 									class="text-danger">*</span>:
-								</label>
-								 <input class="form-control" id="id" placeholder="Id" name="id"
+								</label> <input class="form-control" id="id" placeholder="Id" name="id"
 									type="text" required>
 								<div class="valid-feedback">Good</div>
 								<div class="invalid-feedback">Please fill the field</div>
 							</div>
 							<div class="form-group my-4">
 								<label for="title" class="mt-4 mb-2 fw-bold">Number Of
-									Leaves<span class="text-danger">*</span>:
-								</label>
-								 <input class="form-control" id="number" placeholder="Number Of Leaves" name="number"
-									type="number" required>
+									Days<span class="text-danger">*</span>:
+								</label> <input class="form-control" id="number"
+									th:field="${leave.numberOfDays}" placeholder="Number Of Leaves"
+									name="number" type="number" required>
 								<div class="valid-feedback">Good</div>
 								<div class="invalid-feedback">Please fill the field</div>
+							</div>
+							<div class="form-group my-4">
+								<label for="title" class="mt-4 mb-2 fw-bold">Type Of
+									Leave<span class="text-danger">*</span>:
+								</label> <select id="preferedTime" name="preferedTime"
+									th:field="${leave.type}" class="form-control" required>
+
+									<option th:value="shortServic" selected>Short-service
+										leave</option>
+									<option th:value="longServic">Long-service leave</option>
+									<option th:value="sick">Sick leave</option>
+								</select>
+								<div class="valid-feedback">Good</div>
+								<div class="invalid-feedback">Please fill the field</div>
+							</div>
+
+							<div class="form-group my-4">
+								<label for="title" class="mt-4 mb-2 fw-bold">Reason<span
+									class="text-danger">*</span>:
+								</label> <input type="text" class="form-control"
+									th:field="${leave.reason}" id="reason" placeholder="Reason"
+									name="reason" required>
+								<div class="valid-feedback">Good</div>
+								<div class="invalid-feedback">Please fill the field</div>
+							</div>
+
+							<div class="alert alert-success" role="alert"
+								style="margin-top: 24px" th:if="${message!=null}">
+								<span th:remove="tag" th:text="${message}"></span>
 							</div>
 
 							<div class="d-flex justify-content-center">

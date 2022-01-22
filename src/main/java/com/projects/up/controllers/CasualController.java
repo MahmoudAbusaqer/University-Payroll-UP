@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.projects.up.dao.CasualRepository;
 import com.projects.up.dao.TimeCardRepository;
 import com.projects.up.entities.Casual;
-import com.projects.up.entities.Leaves;
 import com.projects.up.entities.TimeCard;
 
 @Controller
@@ -37,7 +36,6 @@ public class CasualController {
 		String st = null;
 		while ((st = br.readLine()) != null) {
 			id = Integer.parseInt(st);
-			System.out.println("id: " + id);
 		}
 		Casual casual = casualRepo.findById(id).get();
 		model.addAttribute("employee", casual);
@@ -56,7 +54,6 @@ public class CasualController {
 		String st = null;
 		while ((st = br.readLine()) != null) {
 			id = Integer.parseInt(st);
-			System.out.println("id: " + id);
 		}
 		Casual casual = casualRepo.findById(id).get();
 		timeCard.setEmployee(casual);
@@ -71,7 +68,6 @@ public class CasualController {
 		String st = null;
 		while ((st = br.readLine()) != null) {
 			id = Integer.parseInt(st);
-			System.out.println("id: " + id);
 		}
 		model.addAttribute("employee", casualRepo.findById(id).get());
 		return "casual/updateInfo";
@@ -83,7 +79,6 @@ public class CasualController {
 		String st = null;
 		while ((st = br.readLine()) != null) {
 			id = Integer.parseInt(st);
-			System.out.println("id: " + id);
 		}
 		Casual casual2 = casualRepo.findById(id).get();
 		casual2.setName(casual.getName());

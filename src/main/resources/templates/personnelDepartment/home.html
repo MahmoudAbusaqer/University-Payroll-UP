@@ -12,12 +12,18 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+<!-- Bootstrap JS -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+	integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+	crossorigin="anonymous"></script>
 </head>
 
 <body style="background-color: #f8f9fd">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-fluid">
-			<a class="navbar-brand" th:href="@{/pd/}">University Payroll - UP | Personnel Department</a>
+			<a class="navbar-brand" th:href="@{/pd/}">University Payroll - UP
+				| Personnel Department</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 				aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -27,50 +33,114 @@
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 					<a class="nav-link active" aria-current="page" th:href="@{/pd/}">Home</a>
-					 <a class="nav-link" th:href="@{/pd/addEmployee}">Add Employee</a>
-					 <a class="nav-link" th:href="@{/pd/deleteEmployee}">Delete Employee</a>
-					 <a class="nav-link" th:href="@{/pd/manageLeaves}">Manage Leaves</a>
-					 <a class="nav-link" th:href="@{/pd/recordLeaves}">Record Leaves</a>
+					<a class="nav-link" th:href="@{/pd/addEmployee}">Add Employee</a> <a
+						class="nav-link" th:href="@{/pd/deleteEmployee}">Delete
+						Employee</a> <a class="nav-link" th:href="@{/pd/manageLeaves}">Manage
+						Leaves</a> <a class="nav-link" th:href="@{/pd/recordLeaves}">Record
+						Leaves</a>
 				</div>
 			</div>
 		</div>
 	</nav>
-<div class="d-flex align-items-start m-4"></div>
-	<!-- info card -->
-	<div class="col d-flex justify-content-center">
-		<div class="card mb-3 text-center display:flex"
-			style="max-width: 840px;">
-			<div class="row g-0">
-				<div class="col-md-4 text-center">
-					<img th:src="@{/img/academics.png}"
-						class="img-fluid rounded-start " alt="...">
+	<div class="d-flex align-items-start m-4"></div>
+	<!-- Payment Card -->
+	<div class="container d-flex justify-content-center">
+		<div class="card h-50 w-75 p-3 shadow-sm"
+			style="background-color: white; border-top: 5px solid #007BFF;">
+			<nav>
+				<div class="nav nav-tabs" id="nav-tab" role="tablist">
+					<button class="nav-link active" id="nav-home-tab"
+						data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+						role="tab" aria-controls="nav-home" aria-selected="true">Make
+						Payment to Casual Employees</button>
+					<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+						data-bs-target="#nav-profile" type="button" role="tab"
+						aria-controls="nav-profile" aria-selected="false">Make
+						Payment to Full-Time Employees</button>
 				</div>
-				<div class="col-md-8 ">
-					<div class="card-body">
-						<h1 class="card-title fw-bold">Academic Information</h1>
+			</nav>
+			<div class="tab-content" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+					aria-labelledby="nav-home-tab">
+					<!--Form-->
 
-						<!-- table-->
-						<table class="table">
+					<div class="card-body">
+						<div class="card-title"></div>
+						<div class="row">
+							<div class="col-1">
+								<i class="fas fa-male " style="color: #d4d3d3; font-size: 300%;"></i>
+							</div>
+							<h3 class="my-4 text-center" style="color: #007BFF;">Make
+								Payment to Casual Employees - Timecards</h3>
+						</div>
+						<div class="alert alert-success" role="alert"
+							style="margin-top: 24px" th:if="${message!=null}">
+							<span th:remove="tag" th:text="${message}"></span>
+						</div>
+						<table class="table table-bordered table-striped">
+
 							<thead>
-							<tbody th:object="${employee}">
 								<tr>
-									<th>ID:</th>
-									<td th:text="${employee.id}"></td>
+									<th>Timecard Id</th>
+									<th>Academic ID</th>
+									<th>Academic Name</th>
+									<th>Hours Worked</th>
+									<th>Deducts Tax</th>
+									<th>Actions</th>
 								</tr>
-								<tr>
-									<th>Name:</th>
-									<td th:text="${employee.name}"></td>
-								</tr>
-								<tr>
-									<th>Email:</th>
-									<td th:text="${employee.email}"></td>
+							</thead>
+							<tbody>
+								<tr th:each="timecard: ${timecards}">
+									<td th:text="${timecard.timeCardId}" />
+									<td th:text="${timecard.employee.getId()}" />
+									<td th:text="${timecard.employee.getName()}" />
+									<td th:text="${timecard.hoursWorked}" />
+									<td th:text="${timecard.tax}" />
+									<td><a
+										th:href="@{pd/casual/{id}(id=${timecard.timeCardId})}"
+										class="btn btn-success">Pay</a></td>
 								</tr>
 							</tbody>
+
 						</table>
+					</div>
+				</div>
+
+				<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+					aria-labelledby="nav-profile-tab">
+					<!--Form-->
+
+					<div class="card-body">
+						<div class="card-title"></div>
+						<div class="row">
+							<div class="col-1">
+								<i class="fas fa-male " style="color: #d4d3d3; font-size: 300%;"></i>
+							</div>
+							<h3 class="my-4 text-center" style="color: #007BFF;">Make
+								Payment to Full-Time Employees</h3>
+						</div>
+						<div class="alert alert-success" role="alert"
+							style="margin-top: 24px" th:if="${message!=null}">
+							<span th:remove="tag" th:text="${message}"></span>
+						</div>
+						<div class="alert alert-danger" role="alert"
+							style="margin-top: 24px" th:if="${error!=null}">
+							<p th:text="${error}"></p>
+						</div>
+						<div class="d-grid gap-2">
+						<a th:href="@{pd/fulltime/}" class="btn btn-success">Pay all
+								Full-Time Employees</a>
+<!-- 							<button class="btn btn-success"  th:href="pd/fulltime/" type="button">Pay all -->
+<!-- 								Full-Time Employees</button> -->
+<!-- 								<td><a -->
+<!-- 										th:href="@{pd/casual/{id}(id=${timecard.timeCardId})}" -->
+<!-- 										class="btn btn-success">Pay</a></td> -->
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

@@ -30,34 +30,71 @@
 					<a class="nav-link " th:href="@{/pd/}">Home</a> <a class="nav-link"
 						th:href="@{/pd/addEmployee}">Add Employee</a> <a class="nav-link"
 						th:href="@{/pd/deleteEmployee}">Delete Employee</a> <a
-						class="nav-link active" aria-current="page" th:href="@{/pd/manageLeaves}">Manage
-						Leaves</a> <a class="nav-link" th:href="@{/pd/recordLeaves}">Record
-						Leaves</a>
+						class="nav-link active" aria-current="page"
+						th:href="@{/pd/manageLeaves}">Manage Leaves</a> <a
+						class="nav-link" th:href="@{/pd/recordLeaves}">Record Leaves</a>
 				</div>
 			</div>
 		</div>
 	</nav>
-	
 
-<script>
-        // Disable form submissions if there are invalid fields
-        (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                // Get the forms we want to add validation styles to
-                var forms = document.getElementsByClassName('validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>	
+	<div class="d-flex align-items-start m-4"></div>
+	<div class="container d-flex justify-content-center">
+		<div class="card h-50 w-75 p-3 shadow-sm"
+			style="background-color: white; border-top: 5px solid #007BFF;">
+
+			<div class="tab-content" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+					aria-labelledby="nav-home-tab">
+
+					<!--Form-->
+					<div class="card-body">
+						<div class="card-title"></div>
+						<div class="row">
+							<div class="col-1">
+								<i class="fas fa-male " style="color: #d4d3d3; font-size: 300%;"></i>
+							</div>
+							<h3 class="my-4 text-center" style="color: #007BFF;">All The
+								Leaves</h3>
+						</div>
+						<div class="alert alert-success" role="alert"
+							style="margin-top: 24px" th:if="${message!=null}">
+							<span th:remove="tag" th:text="${message}"></span>
+						</div>
+						<table class="table table-bordered table-striped">
+
+							<thead>
+								<tr>
+									<th>Leave ID</th>
+									<th>Academic ID</th>
+									<th>Academic Name</th>
+									<th>Number Of Days</th>
+									<th>Type</th>
+									<th>Reason</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="leave: ${leaves}">
+									<td th:text="${leave.leaveId}" />
+									<td th:text="${leave.employee.getId()}" />
+									<td th:text="${leave.employee.getName()}" />
+									<td th:text="${leave.numberOfDays}" />
+									<td th:text="${leave.type}" />
+									<td th:text="${leave.reason}" />
+									<td><a th:href="@{manageLeaves/{id}(id=${leave.leaveId})}"
+										class="btn btn-danger">Done</a></td>
+								</tr>
+							</tbody>
+
+						</table>
+					</div>
+					<!--End of form-->
+
+				</div>
+
+			</div>
+		</div>
+	</div>
 </body>
 </html>

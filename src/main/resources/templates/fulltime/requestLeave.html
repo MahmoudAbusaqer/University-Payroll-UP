@@ -56,7 +56,8 @@
 							<h3 class="my-4 text-center" style="color: #007BFF;">Request
 								a Leave</h3>
 						</div>
-						<form action="/fulltime/requestLeave" method="post" th:object="${leave}" class="validation"  novalidate>
+						<form action="/fulltime/requestLeave" method="post"
+							th:object="${leave}" class="validation" novalidate>
 							<!-- <div class="form-group my-4">
 								<label for="title" class="mt-4 mb-2 fw-bold">ID:</label> <input
 									class="form-control" id="id" th:field="leave.employee"
@@ -67,9 +68,9 @@
 							<div class="form-group my-4">
 								<label for="title" class="mt-4 mb-2 fw-bold">Number Of
 									Days <span class="text-danger">*</span>:
-								</label> <input class="form-control" th:field="${leave.numberOfDays}" id="number"
-									placeholder="Number Of Days" name="number" type="number"
-									required>
+								</label> <input class="form-control" th:field="${leave.numberOfDays}"
+									id="number" placeholder="Number Of Days" name="number"
+									type="number" required>
 								<div class="valid-feedback">Good</div>
 								<div class="invalid-feedback">Please fill the field</div>
 							</div>
@@ -77,8 +78,8 @@
 							<div class="form-group my-4">
 								<label for="title" class="mt-4 mb-2 fw-bold">Type Of
 									Leave<span class="text-danger">*</span>:
-								</label> <select id="preferedTime" name="preferedTime" th:field="${leave.type}"
-									class="form-control" required>
+								</label> <select id="preferedTime" name="preferedTime"
+									th:field="${leave.type}" class="form-control" required>
 
 									<option th:value="shortServic" selected>Short-service
 										leave</option>
@@ -92,11 +93,18 @@
 							<div class="form-group my-4">
 								<label for="title" class="mt-4 mb-2 fw-bold">Reason<span
 									class="text-danger">*</span>:
-								</label> <input type="text" class="form-control" th:field="${leave.reason}" id="reason"
-									placeholder="Reason" name="reason" required>
+								</label> <input type="text" class="form-control"
+									th:field="${leave.reason}" id="reason" placeholder="Reason"
+									name="reason" required>
 								<div class="valid-feedback">Good</div>
 								<div class="invalid-feedback">Please fill the field</div>
 							</div>
+							
+							<div class="alert alert-success" role="alert"
+								style="margin-top: 24px" th:if="${message!=null}">
+								<span th:remove="tag" th:text="${message}"></span>
+							</div>
+							
 							<div class="d-flex justify-content-center">
 								<button type="submit" class="btn btn-primary my-4 w-100">Add</button>
 							</div>

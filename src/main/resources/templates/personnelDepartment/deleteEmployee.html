@@ -34,10 +34,10 @@
 				<div class="navbar-nav">
 					<a class="nav-link " th:href="@{/pd/}">Home</a> <a class="nav-link"
 						th:href="@{/pd/addEmployee}">Add Employee</a> <a
-						class="nav-link active" aria-current="page" th:href="@{/pd/deleteEmployee}">Delete
-						Employee</a> <a class="nav-link" th:href="@{/pd/manageLeaves}">Manage
-						Leaves</a> <a class="nav-link" th:href="@{/pd/recordLeaves}">Record
-						Leaves</a>
+						class="nav-link active" aria-current="page"
+						th:href="@{/pd/deleteEmployee}">Delete Employee</a> <a
+						class="nav-link" th:href="@{/pd/manageLeaves}">Manage Leaves</a> <a
+						class="nav-link" th:href="@{/pd/recordLeaves}">Record Leaves</a>
 				</div>
 			</div>
 		</div>
@@ -79,6 +79,7 @@
 
 							<thead>
 								<tr>
+									<th>ID</th>
 									<th>Name</th>
 									<th>Email</th>
 									<th>Actions</th>
@@ -86,6 +87,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="employee: ${fullTimeEmployees}">
+									<td th:text="${employee.id}" />
 									<td th:text="${employee.name}" />
 									<td th:text="${employee.email}" />
 									<td><a
@@ -115,6 +117,7 @@
 
 							<thead>
 								<tr>
+									<th>ID</th>
 									<th>Name</th>
 									<th>Email</th>
 									<th>Actions</th>
@@ -122,6 +125,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="employee: ${casualEmployees}">
+									<td th:text="${employee.id}" />
 									<td th:text="${employee.name}" />
 									<td th:text="${employee.email}" />
 									<td><a
