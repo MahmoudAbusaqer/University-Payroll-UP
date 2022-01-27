@@ -4,3 +4,20 @@ It does have many employees type like full-time, casual (contractual), and Perso
 The application will also deduct taxes from the full-time academics while the casual will choose if the system just does it or they do it on their own. The academics can choose the payment method, the payments can be mailed (as bank cheques) to academics to their email address or can be directly deposited into an academic’s bank account.
 The application was deployed on the Cloud (via Oracle Cloud)
 
+## Technology used 
+
+* Spring 5
+
+* Spring Boot 2
+
+* Java Persistence API - JPA
+
+* Thymeleaf
+
+* Web MVC
+
+* REST 
+
+* Spring Email 
+
+* Maven
